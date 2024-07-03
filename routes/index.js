@@ -1,14 +1,13 @@
 const router = require('express').Router();
 const apiRoutes = require('./api');
-const htmlRoutes = require('./htmlRoutes');
+const homeRoutes = require('./homeRoutes');
 const dashboardRoutes = require('./dashboardRoutes');
-const loginRoutes = require('./loginRoutes');
-
-router.use('/', htmlRoutes);
-router.use('/dashboard', dashboardRoutes);
-router.use('/', loginRoutes);
+// const loginRoutes = require('./loginRoutes');
 
 router.use('/api', apiRoutes);
+router.use('/', homeRoutes);
+router.use('/dashboard', dashboardRoutes);
+// router.use('/', loginRoutes);
 
 router.get('/', (req, res) => {
     res.render('homepage', { title: 'Home' });
