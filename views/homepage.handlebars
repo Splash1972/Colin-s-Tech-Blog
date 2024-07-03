@@ -1,0 +1,30 @@
+<body>
+  {{#if logged_in}}
+    <nav class="navbar fixed-top" style="background-color: #e3f2fd;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Homepage</a>
+        <a class="navbar-brand" href="/dashboard">Dashboard</a>
+        <button id="logout" class="btn btn-outline-danger">Logout</button>
+      </div>
+    </nav>
+  {{else}}
+    <nav class="navbar fixed-top" style="background-color: #a0782f;">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Homepage</a>
+        <button class="btn btn-outline-light" onclick="location.href='/login'">Login</button>
+      </div>
+    </nav>
+  {{/if}}
+  <br>
+  <br>
+  <br>
+  <h1>Blog Posts</h1>
+  {{#each blogs}}
+    <div>
+      <h2>{{this.title}}</h2>
+      <p>{{this.bloginfo}}</p>
+      <p>Posted by {{this.user.username}} on {{this.createdAt}}</p>
+    </div>
+  {{/each}}
+  <script src="/js/logout.js"></script>
+</body>

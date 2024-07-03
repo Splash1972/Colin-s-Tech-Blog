@@ -1,0 +1,18 @@
+<body>
+  <h1>Dashboard</h1>
+  {{#each blogs}}
+    <div>
+      <h2>{{this.title}}</h2>
+      <p>{{this.bloginfo}}</p>
+      <p>Posted on {{this.createdAt}}</p>
+      <button data-id="{{this.id}}" class="delete-btn">Delete</button>
+    </div>
+  {{/each}}
+  <form id="new-blog-form">
+    <input type="text" id="title" placeholder="Title" required>
+    <textarea id="bloginfo" placeholder="Your blog content" required></textarea>
+    <button type="submit">Add Blog</button>
+  </form>
+  <script src="/js/dashboard.js"></script>
+</body>
+</html>

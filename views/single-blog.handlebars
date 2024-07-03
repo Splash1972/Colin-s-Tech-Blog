@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}}</title>
+</head>
+<body>
+  <h1>{{title}}</h1>
+  <p>{{bloginfo}}</p>
+  <p>Posted by {{user.username}} on {{createdAt}}</p>
+  {{#if logged_in}}
+    <form id="comment-form">
+      <textarea id="comment-text" placeholder="Your comment" required></textarea>
+      <button type="submit">Add Comment</button>
+    </form>
+  {{else}}
+    <p><a href="/login">Login</a> to add a comment</p>
+  {{/if}}
+  <div id="comments">
+    {{#each comments}}
+      <div>
+        <p>{{this.comment_text}}</p>
+        <p>Posted by {{this.user.username}} on {{this.createdAt}}</p>
+      </div>
+    {{/each}}
+  </div>
+  <script src="/js/comment.js"></script>
+</body>
+</html>
