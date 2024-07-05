@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Comment } = require('../..models');
+const { Comment } = require('../../models');
 
 // get
 router.get('/', (req, res) => {
@@ -19,7 +19,9 @@ router.post('/', (req, res) => {
         })
             .then(dbCommentData => res.json(dbCommentData))
             .catch(err => res.status(400).json(err));
-    }
+    }   else {
+        res.status(401).json({ message: 'You must be logged in to post a comment.' });
+      }
 });
 
 //DELETE

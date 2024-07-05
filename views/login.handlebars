@@ -1,20 +1,31 @@
-<h1>Login</h1>
-<form class="login-form" action="/login" method="POST">
-  <input type="email" id="email-login" placeholder="Email" required>
-  <input type="password" id="password-login" placeholder="Password" required>
-  <button type="submit">Login</button>
-</form>
-<form class="signup-form">
+<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
   <div>
-    <label for"email-signup">Email:</label>
-    <input type="email" id="email-signup">
+    <h2>Login</h2>
+    <form class="login-form" action="/users/login" method="POST" style="text-align: center;">
+      <input type="text" id="username-login" placeholder="Username" required>
+      <br>
+      <input type="password" id="password-login" placeholder="Password" required>
+      <br>
+      <button type="submit">Login</button>
+    </form>
   </div>
+
   <div>
-    <label for="password-signup">Password:</label>
-    <input type="password" id="password-signup">
+    <h2>Signup</h2>
+    <form class="signup-form" action="/users" method="POST" style="text-align: center;">
+      <div>
+        <label for="username-signup">Username:</label>
+        <input type="text" id="username-signup" name="username" required>
+      </div>
+      <div>
+        <label for="password-signup">Password:</label>
+        <input type="password" id="password-signup" name="password" required>
+      </div>
+      <div>
+        <button type="submit">Signup</button>
+      </div>
+    </form>
   </div>
-  <div>
-    <button type="submit">Signup</button>
-  </div>
-</form>
+</div>
+
 <script src="/js/login.js"></script>

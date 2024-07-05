@@ -8,7 +8,7 @@ router.get('/', withAuth, async (req, res) => {
       where: {
         user_id: req.session.user_id,
       },
-      attributes: ['id', 'title', 'created_at'],
+      attributes: ['id', 'title', 'bloginfo', 'created_at'],
       include: [
         {
           model: Comment,
@@ -62,7 +62,7 @@ router.get('/edit/:id', withAuth, async (req, res) => {
 
     const post = dbBlogData.get({ plain: true });
     res.render('edit-blog', {
-      post,
+      blog,
       logged_in: req.session.logged_in,
     });
   } catch (err) {

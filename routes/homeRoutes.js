@@ -5,7 +5,7 @@ const { Blog, User, Comment } = require('../models');
 router.get('/', async (req, res) => {
   try {
     const dbBlogData = await Blog.findAll({
-      attributes: ['id', 'title', 'created_at'],
+      attributes: ['id', 'title', 'created_at', 'bloginfo'],
       order: [['created_at', 'DESC']],
       include: [
         {
@@ -47,7 +47,7 @@ router.get('/blog/:id', async (req, res) => {
       where: {
         id: req.params.id,
       },
-      attributes: ['id', 'title', 'created_at', 'contents'],
+      attributes: ['id', 'title', 'created_at', 'contents', 'bloginfo'],
       include: [
         {
           model: Comment,

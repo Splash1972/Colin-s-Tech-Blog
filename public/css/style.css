@@ -1,20 +1,36 @@
-.bg 
-{background: linear-gradient(to bottom, rgb(255, 216, 125), rgb(156, 140, 111));
-background-repeat: no-repeat;
-min-height: 100vh;
-margin: 0;
+.bg {
+  background: linear-gradient(to bottom, rgb(255, 216, 125), rgb(156, 140, 111));
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  margin: 0;
 }
 
 h1 {
-    color: white;
-    text-align: center;
-  }
+  color: white;
+  text-align: center;
+}
 
-  h2 {
-    color: black;
-    text-align: center;
-  }
-  .header {
-    color: white;
-    text-align: center;
-  }
+h2 {
+  color: black;
+  text-align: center;
+}
+
+.header {
+  color: white;
+  text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+nav {
+  padding: 20px;
+}
+
+ul {
+  background-color: antiquewhite;
+  padding: 5px;
+  margin: 10px;
+}
+

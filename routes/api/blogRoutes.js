@@ -6,119 +6,113 @@ const withAuth = require('../../utils/auth');
 router.get('/', async (req, res) => {
   try {
     const dbBlogData = await Blog.findAll({
-      attributes: ['id', 'title', 'created_at'],
+      attributes: ['id', 'title', 'bloginfo', 'created_at'],
       order: [['created_at', 'DESC']],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'blog_id', 'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        },
-        {
-          model: User,
-          attributes: ['username']
-        }
-      ]
-    });
+      include: [{
+        model: Comment,
+       attributes: ['id', 'comment_text', 'blog_id', 'user_id', 'created_at'],
+       include: {
+        model: User,
+        attributes: ['username']
+       } 
+      
+      },
+      {
+        model: User,
+        attributes: ['username']
+      }
+    ]
+    })
     res.status(200).json(dbBlogData);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Get blog by id
-router.get('/:id', async (req, res) => {
-  try {
-    const dbBlogData = await Blog.findOne({
-      where: {
-        id: req.params.id
-      },
-      attributes: ['id', 'title', 'created_at', 'contents'],
-      include: [
-        {
-          model: Comment,
-          attributes: ['id', 'comment_text', 'blog_id', 'user_id', 'created_at'],
-          include: {
-            model: User,
-            attributes: ['username']
-          }
-        },
-        {
+// blogs with ids
+
+router.get('/:id', (req, res) => {
+  Blog.findOne({
+    where: {
+      id: req.params.id
+    },
+    attributes: ['id', 'title', 'created_at', 'bloginfo'],
+    include: [
+      {
+        model: Comment,
+        attributes: ['id', 'comment_text', 'blog_id', 'user_id', 'created_at'],
+        include: {
           model: User,
           attributes: ['username']
         }
-      ]
-    });
-
+      },
+      {
+      model: User,
+      attributes: ['username']
+      }
+    ]
+  })
+  .then(dbBlogData => {
     if (!dbBlogData) {
-      res.status(404).json({ message: 'No blog found with this id.' });
+      res.status(404).json({ message: 'No Blog found with this id.' });
       return;
     }
-    res.status(200).json(dbBlogData);
-  } catch (err) {
-    res.status(500).json(err);
-  }
+    res.json(dbBlogData);
+  })
+  .catch(err => res.status(500).json(err));
 });
 
-// Create a new blog
-router.post('/', withAuth, async (req, res) => {
-  try {
-    const dbBlogData = await Blog.create({
+//Post
+
+router.post('/', withAuth, (req, res) => {
+  Blog.create({
       title: req.body.title,
-      contents: req.body.contents,
+      bloginfo: req.body.bloginfo,
       user_id: req.session.user_id
-    });
-    res.status(200).json(dbBlogData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+  })
+      .then(dbBlogData => res.json(dbBlogData))
+      .catch(err => res.status(400).json(err));
 });
 
-// Update blog by id
-router.put('/:id', withAuth, async (req, res) => {
-  try {
-    const dbBlogData = await Blog.update(
-      {
-        title: req.body.title,
-        contents: req.body.contents
-      },
-      {
-        where: {
-          id: req.params.id
-        }
-      }
-    );
+// Put with id's
 
-    if (!dbBlogData[0]) {
-      res.status(404).json({ message: 'No blog found with this id.' });
-      return;
-    }
-    res.status(200).json(dbBlogData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
-});
-
-// Delete blog by id
-router.delete('/:id', withAuth, async (req, res) => {
-  try {
-    const dbBlogData = await Blog.destroy({
+router.put('/:id', withAuth, (req, res) => {
+  Blog.update(
+    {
+      title: req.body.title
+    },
+    {
       where: {
         id: req.params.id
       }
-    });
-
+    }
+  )
+  .then(dbBlogData => {
     if (!dbBlogData) {
-      res.status(404).json({ message: 'No blog found with this id.' });
+      res.status(404).json({ message: 'No blog found with this id.'});
       return;
     }
-    res.status(200).json(dbBlogData);
-  } catch (err) {
-    res.status(400).json(err);
-  }
+    res.json(dbBlogData);
+  })
+  .catch(err => res.status(400).json(err));
 });
+
+// delete
+
+router.delete('/:id', withAuth, (req, res) => {
+  Blog.destroy({
+      where: {
+          id: req.params.id
+      }
+  })
+      .then(dbBlogData => {
+          if (!dbBlogData) {
+              res.status(404).json({ message: 'No blog found with this id.' });
+              return;
+          }
+          res.json(dbBlogData);
+      })
+      .catch(err => res.status(400).json(err));
+})
 
 module.exports = router;

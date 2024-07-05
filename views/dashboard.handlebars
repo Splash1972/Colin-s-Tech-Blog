@@ -1,18 +1,33 @@
-<body>
-  <h1>Dashboard</h1>
-  {{#each blogs}}
-    <div>
-      <h2>{{this.title}}</h2>
-      <p>{{this.bloginfo}}</p>
-      <p>Posted on {{this.createdAt}}</p>
-      <button data-id="{{this.id}}" class="delete-btn">Delete</button>
-    </div>
-  {{/each}}
-  <form id="new-blog-form">
-    <input type="text" id="title" placeholder="Title" required>
-    <textarea id="bloginfo" placeholder="Your blog content" required></textarea>
-    <button type="submit">Add Blog</button>
-  </form>
-  <script src="/js/dashboard.js"></script>
-</body>
-</html>
+<div class="bg card px-5">
+  <div class="card-body">
+    <h1>Dashboard</h1>
+    <h2>Create New Blog</h2>
+    <form id="new-blog-form">
+      <div>
+        <label for="title">Title:</label>
+      </div>
+      <div>
+        <input type="text" id="title" placeholder="Title" required>
+      </div>
+      <br>
+      <div>
+        <label for="bloginfo">Type Your Blog Here:</label>
+      </div>
+      <div>
+        <textarea id="bloginfo" placeholder="Your blog content" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Blog</button>
+    </form>
+    {{#if blogs.length}}
+    <h2>Previously Posted</h2>
+    <ol>
+      {{#each blogs as |blog|}}
+      <li>
+        {{> blog-info blog}}
+      </li>
+      {{/each}}
+    </ol>
+    {{/if}}
+  </div>
+</div>
+<script src="/js/dashboard.js"></script>
