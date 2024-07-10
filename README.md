@@ -4,7 +4,7 @@ My full stack tech blog from scratch using the Handlebars engine for dynamic pro
 
 The link to the deployed site on Render is here:
 
-
+https://colin-s-tech-blog.onrender.com/
 
 Here we have a website, that upon loading, shows posts that have been made (if any) by any user.
 
