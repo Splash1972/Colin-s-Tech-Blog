@@ -2,32 +2,36 @@ const router = require('express').Router();
 const { Blog, User, Comment } = require('../../models');
 const withAuth = require('../../utils/auth');
 
-// Get All Blogs
+// Fetch all blogs
 router.get('/', async (req, res) => {
   try {
     const dbBlogData = await Blog.findAll({
       attributes: ['id', 'title', 'bloginfo', 'created_at'],
       order: [['created_at', 'DESC']],
-      include: [{
-        model: Comment,
-       attributes: ['id', 'comment_text', 'blog_id', 'user_id', 'created_at'],
-       include: {
-        model: User,
-        attributes: ['username']
-       } 
-      
-      },
-      {
-        model: User,
-        attributes: ['username']
-      }
-    ]
-    })
-    res.status(200).json(dbBlogData);
+      include: [
+        {
+          model: Comment,
+          attributes: ['id', 'comment_text', 'created_at'],
+          include: {
+            model: User,
+            attributes: ['username'],
+          },
+        },
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    });
+
+    const blogs = dbBlogData.map(blog => blog.get({ plain: true }));
+    res.render('dashboard', { blogs }); // Render dashboard.handlebars with blogs data
   } catch (err) {
+    console.error('Error fetching blogs:', err);
     res.status(500).json(err);
   }
 });
+
 
 // blogs with ids
 
@@ -65,6 +69,7 @@ router.get('/:id', (req, res) => {
 //Post
 
 router.post('/', withAuth, (req, res) => {
+  console.log(req.body);
   Blog.create({
       title: req.body.title,
       bloginfo: req.body.bloginfo,

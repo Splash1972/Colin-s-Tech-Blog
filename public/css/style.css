@@ -34,3 +34,9 @@ ul {
   margin: 10px;
 }
 
+main {
+  margin: 20px auto;
+  width: 90%;
+  color: #000;
+}
+

@@ -2,6 +2,7 @@
   <div class="card-body">
     <h1>Dashboard</h1>
     <h2>Create New Blog</h2>
+    <div class="ms-1">
     <form id="new-blog-form">
       <div>
         <label for="title">Title:</label>
@@ -18,13 +19,16 @@
       </div>
       <button type="submit" class="btn btn-primary">Add Blog</button>
     </form>
+    </div>
     {{#if blogs.length}}
     <h2>Previously Posted</h2>
     <ol>
       {{#each blogs as |blog|}}
       <li>
         {{> blog-info blog}}
+        <a href="/dashboard/edit/{{blog.id}}" id="edit-link">Edit Post</a>
       </li>
+      <br>
       {{/each}}
     </ol>
     {{/if}}

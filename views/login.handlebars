@@ -1,31 +1,36 @@
-<div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
-  <div>
-    <h2>Login</h2>
-    <form class="login-form" action="/users/login" method="POST" style="text-align: center;">
-      <input type="text" id="username-login" placeholder="Username" required>
-      <br>
-      <input type="password" id="password-login" placeholder="Password" required>
-      <br>
-      <button type="submit">Login</button>
-    </form>
+{{!-- <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh;">
+  --}}
+  <div class="card bg">
+    <div class="card-body">
+      <h3>Login</h3>
+      <form id="login-form" method="POST">
+        <div>
+          <input type="text" id="username-login" placeholder="Username" required>
+        </div>
+        <div>
+          <input type="password" id="password-login" placeholder="Password" required>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+
+<br>
+
+      <h3>Signup</h3>
+      <form id="signup-form" method="POST">
+        <div>
+          <input type="text" id="username-signup" name="username" placeholder="Username">
+        </div>
+        <div>
+          <input type="password" id="password-signup" name="password" placeholder="Password">
+        </div>
+        <div>
+          <button type="submit">Signup</button>
+        </div>
+      </form>
+
+    </div>
   </div>
 
-  <div>
-    <h2>Signup</h2>
-    <form class="signup-form" action="/users" method="POST" style="text-align: center;">
-      <div>
-        <label for="username-signup">Username:</label>
-        <input type="text" id="username-signup" name="username" required>
-      </div>
-      <div>
-        <label for="password-signup">Password:</label>
-        <input type="password" id="password-signup" name="password" required>
-      </div>
-      <div>
-        <button type="submit">Signup</button>
-      </div>
-    </form>
-  </div>
 </div>
 
 <script src="/js/login.js"></script>

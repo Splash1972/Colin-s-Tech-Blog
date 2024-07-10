@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +8,42 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-  <nav class="navbar fixed-top" style="background-color: #e1bd92;">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="/">Homepage</a>
-      {{#if logged_in}}
-        <a class="navbar-brand" href="/dashboard">Dashboard</a>
-        <button id="logout" class="btn btn-outline-danger ml-auto">Logout</button>
-      {{else}}
-        <button class="btn btn-outline-light ml-auto" onclick="location.href='/login'">Login</button>
-      {{/if}}
-    </div>
+
+  <div class="wrapper">
+    <header>
+      <nav class="navbar fixed-top" style="background-color: #acacac;">
+        <div class="container-fluid">
+          <h1>Colin's Tech Blog</h1>
+          <button class="btn btn-outline-light ml-auto"><a href="/">Home</a></button>
+          {{#if logged_in}}
+          <button class="btn btn-outline-light ml-auto"><a href="/dashboard">Dashboard</a></button>
+          <button id="logout" class="btn btn-outline-danger ml-auto">Logout</button>
+          {{else}}
+          <button class="btn btn-outline-light ml-auto" onclick="location.href='/login'">Login</button>
+          {{/if}}
+        </div>
+  </div>
   </nav>
+
+  </header>
   <br>
   <br>
-  {{{body}}}
+  <main>
+    <div class="bg">
+      {{{body}}}
+    </div>
+  </main>
+
+
   {{#if logged_in}}
-    <script src="/js/logout.js"></script>
+  {{!--
+  <script id="edit-blog-template" type="text/x-handlebars-template"> --}}
+    {{!-- {{> editBlog}} --}}
+{{!-- </script> --}}
+  <script src="/js/logout.js"></script>
   {{/if}}
 </body>
+
 </html>
